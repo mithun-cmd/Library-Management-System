@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Borrow/Return</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background-color: beige;">
+
+    <div class="header">
+    <h1>College Library Management System</h1>
+    </div>
+
+    <div class="header-option">
+    <h2>Borrow Book</h2>
+    </div>
+
+    <div class="navigation">
+        <nav>
+        <ul>
+            <li><h3><a href="{{ url_for('home') }}">Home</a></h3></li>|
+            <li><h3><a href="{{ url_for('students') }}">Students</a></h3></li>|
+            <li><h3><a href="{{ url_for('books') }}">Books</a></h3></li>|
+            <li><h3><a href="{{ url_for('history') }}">History</a></h3></li> 
+        </ul>
+        </nav>
+    </div>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: green; text-align: center; list-style-type: none; padding: 10px;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <div>
+    <center>
+    <ul>
+    <form action="{{ url_for('borrowreturn') }}" method="POST">
+        <li><input type="text" id="borrow_student_id" name="borrow_student_id" placeholder="*Enter Student ID" required></li><br>
+        <li><input type="text" id="borrow_book_id" name="borrow_book_id" placeholder="*Enter Book ID" required></li><br><br>
+        <li><button type="reset">Reset</button>   <button type="submit">Borrow</button><br><br>
+    </form>
+    </ul>
+    </center>
+    </div>
+
+    <hr>
+
+    <div class="header-option">
+    <h2>Return Book</h2>
+    </div>
+
+    <div>
+    <center>
+    <ul>
+    <form action="{{ url_for('borrowreturn') }}" method="POST">
+        <li><input type="text" id="return_borrow_id" name="return_borrow_id" placeholder="*Enter Borrow ID" required><li><br><br>
+        <li><button type="reset">Reset</button>   <button type="submit">Return</button><br>
+    </form>
+    </ul>
+    </center>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background-color: beige;">
+
+    <div class="header">
+    <h1>College Library Management System</h1>
+    </div>
+
+    <div class="navigation">
+      <nav>
+        <ul>
+            <li><h3><a href="{{ url_for('home') }}">Home</a></h3></li>|
+            <li><h3><a href="{{ url_for('students') }}">Students</a></h3></li>|
+            <li><h3><a href="{{ url_for('borrowreturn') }}">Borrow/Return</a></h3></li>|
+            <li><h3><a href="{{ url_for('history') }}">History</a></h3></li> 
+
+        <div style="text-align:center; margin-top:10px;">
+          <a href="{{ url_for('all_books') }}"><button type="button">View All Books</button></a>
+        </div>
+
+
+        </ul>
+      </nav>
+    </div>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: green; text-align: center; list-style-type: none; padding: 10px;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <div class="header-option">
+    <h2>Add Book</h2>
+    </div>
+
+    <div>
+    <center>
+    <ul>
+    <form action="/books" method="POST">
+        <li><input type="text" id="book_id" name="book_id" placeholder="*Enter Book ID" required></li><br>
+        <li><input type="text" id="book_title" name="book_title" placeholder="*Enter Book Title" required></li><br>
+        <li><input type="text" id="book_author" name="book_author" placeholder="Enter Author"></li><br><br>
+        <li><button type="reset">Reset</button>   <button type="submit">Add Book</button></li><br>
+    </form>
+    </ul>
+
+    {% if all_books %}
+<h3>All Books</h3>
+<table border="1" cellpadding="5" style="margin:auto; margin-top:10px;">
+    <tr>
+        <th>Book ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Available</th>
+    </tr>
+    {% for book in all_books %}
+    <tr>
+        <td>{{ book.book_id }}</td>
+        <td>{{ book.book_title }}</td>
+        <td>{{ book.author or '' }}</td>
+        <td>{{ 'Yes' if book.available else 'No' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+    </center>
+    </div>
+
+</body>
+</html>

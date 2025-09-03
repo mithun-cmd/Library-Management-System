@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background-color: beige;">
+
+    <div class="header">
+        <h1>College Library Management System</h1>
+    </div>
+
+    <div class="navigation">
+      <nav>
+        <ul>
+            <li><h3><a href="{{ url_for('home') }}">Home</a></h3></li>|
+            <li><h3><a href="{{ url_for('books') }}">Books</a></h3></li>|
+            <li><h3><a href="{{ url_for('borrowreturn') }}">Borrow/Return</a></h3></li>|
+            <li><h3><a href="{{ url_for('history') }}">History</a></h3></li> 
+        
+        <div style="text-align:center; margin-top:10px;">
+          <a href="{{ url_for('all_students') }}"><button type="button">View All Students</button></a>
+        </div>
+
+
+        </ul>
+      </nav>
+    </div>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: green; text-align: center; list-style-type: none; padding: 10px;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <div class="header-option">
+    <h2>Add Student</h2>
+    </div>
+
+    <div>
+    <center>
+    <ul>
+    <form action="/students" method="POST">
+        <li><input type="text" id="student_id" name="student_id" placeholder="*Enter Student ID" required></li><br>
+        <li><input type="text" id="student_name" name="student_name" placeholder="*Enter Student Name" required></li><br>
+        <li><input type="text" id="student_department" name="student_department" placeholder="Enter Department"></li><br><br>
+        <li><button type="reset">Reset</button>   <button type="submit">Add Student</button></li><br>
+    </form>
+    </ul>
+
+    {% if all_students %}
+<h3>All Students</h3>
+<table border="1" cellpadding="5" style="margin:auto; margin-top:10px;">
+    <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Department</th>
+    </tr>
+    {% for student in all_students %}
+    <tr>
+        <td>{{ student.student_id }}</td>
+        <td>{{ student.student_name }}</td>
+        <td>{{ student.department or '' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+    </center>
+    </div>
+
+</body>
+</html>

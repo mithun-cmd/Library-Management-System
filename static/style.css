@@ -1,0 +1,123 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.header{
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 40px;
+}
+
+.navigation{
+    background-color: beige;
+    color: gray;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+.header-option{
+    text-align: center;
+    padding: 15px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li{
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+nav a{
+    text-decoration: none;
+    color: gray;
+}
+
+nav li :hover{
+    color: black;
+}
+
+.searchbar{
+    text-align: center;
+    padding: 20px;
+}
+
+.searchbar input {
+    width: 50%;
+    max-width: 400px;
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+
+}
+
+.image img {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.image p {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+
+.about{
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+}
+
+.about h1{
+    padding: 20px;
+}
+
+.about ul{
+    display: inline;
+
+}
+
+.about li{
+    display: inline;
+    padding: 5px;
+}
+
+.about p{
+    padding: 5px;
+}
+
+input, button {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background-color: gray;
+}
+

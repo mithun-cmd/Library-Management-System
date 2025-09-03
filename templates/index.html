@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background-color: beige;">
+
+    <div class="header">
+        <h1>College Library Management System</h1>
+    </div>
+
+    <div class="navigation">
+        <nav>
+        <ul>
+            <li><h3><a href="{{ url_for('students') }}">Students</a></h3></li>|
+            <li><h3><a href="{{ url_for('books') }}">Books</a></h3></li>|
+            <li><h3><a href="{{ url_for('borrowreturn') }}">Borrow/Return</a></h3></li>|
+            <li><h3><a href="{{ url_for('history') }}">History</a></h3></li> 
+
+        <div style="text-align:center; margin-top:10px;">
+            <a href="{{ url_for('activity_log') }}"><button type="button">View Activity Log</button></a>
+        </div>
+
+        </ul>
+        </nav>
+    </div>
+
+    <!-- Flash messages below navigation -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+<center>
+        <!-- Activity Log Table -->
+    {% if history and show_logs %}
+    <h3>Activity Log</h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Log ID</th>
+            <th>Activity</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for log in history %}
+        <tr>
+            <td>{{ log.log_id }}</td>
+            <td>{{ log.activity }}</td>
+            <td>{{ log.log_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</center>
+
+    <div class="searchbar">
+        <input type="search" placeholder="🔍︎ College Library">
+
+    </div>
+
+    <div class="images">
+    <div class="image">
+        <img src="{{ url_for('static', filename='Images/Library 1.jpg') }}" alt="Library 1">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+    </div>
+    <div class="image">
+        <img src="{{ url_for('static', filename='Images/Library 2.jpg') }}" alt="Library 2">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit...</p>
+    </div>
+    <div class="image">
+        <img src="{{ url_for('static', filename='Images/Library 3.jpg') }}" alt="Library 3">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit...</p>
+    </div>
+    <div class="image">
+        <img src="{{ url_for('static', filename='Images/Library 4.jpg') }}" alt="Library 4">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>  
+    </div>
+    </div>
+
+    <div class="about">
+        <h1>About</h1>
+        <ul>
+            <li>Contact: +04364 55555</li>
+            <li>Email: collegelibrary@gmail.com</li>
+        </ul>
+        <p>| Copyrights @College Library |</p>
+    </div>
+</body>
+</html>

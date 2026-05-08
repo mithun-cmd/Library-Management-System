@@ -80,38 +80,6 @@ A modern full-stack Library Management System built using **Flask**, **MySQL**, 
 
 ---
 
-# 🗂️ Project Structure
-
-```bash
-Library-Management-System/
-│
-├── static/
-│   ├── css/
-│   │   └── style.css
-│   │
-│   ├── js/
-│   │   └── app.js
-│   │
-│   └── Images/
-│
-├── templates/
-│   ├── components/
-│   │   └── sidebar.html
-│   │
-│   ├── layout.html
-│   ├── dashboard.html
-│   ├── students.html
-│   ├── books.html
-│   ├── borrowreturn.html
-│   └── history.html
-│
-├── library.py
-├── schema.sql
-└── README.md
-```
-
----
-
 # ⚙️ Database Features
 
 ## Tables
@@ -223,23 +191,9 @@ http://127.0.0.1:5000
 
 ---
 
-# 🔮 Future Improvements
-
-- JWT Authentication
-- Admin/User roles
-- Fine system
-- Email notifications
-- QR code borrowing
-- Book cover uploads
-- REST API support
-- Charts & analytics
-- AI-based recommendations
-
----
-
 # 👨‍💻 Developed By
 
-## Mithun
+## Mithun Selva M S
 
 B.Tech Information Technology  
 Cybersecurity & Full Stack Development Enthusiast

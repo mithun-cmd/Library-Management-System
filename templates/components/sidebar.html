@@ -1,0 +1,105 @@
+<div class="sidebar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-book"></i>
+
+        <span>LibraryX</span>
+
+    </div>
+
+    <ul class="sidebar-links">
+
+        <li>
+
+            <a
+            href="{{ url_for('home') }}"
+            class="{% if request.endpoint == 'home' %}active{% endif %}"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+            href="{{ url_for('students') }}"
+            class="{% if request.endpoint == 'students' or request.endpoint == 'all_students' %}active{% endif %}"
+            >
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>Students</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+            href="{{ url_for('books') }}"
+            class="{% if request.endpoint == 'books' or request.endpoint == 'all_books' %}active{% endif %}"
+            >
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <span>Books</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+            href="{{ url_for('borrowreturn') }}"
+            class="{% if request.endpoint == 'borrowreturn' %}active{% endif %}"
+            >
+
+                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+                <span>Borrow / Return</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+            href="{{ url_for('history') }}"
+            class="{% if request.endpoint == 'history' or request.endpoint == 'borrow_logs' %}active{% endif %}"
+            >
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>History</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a
+            href="{{ url_for('activity_log') }}"
+            class="{% if request.endpoint == 'activity_log' %}active{% endif %}"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Activity Logs</span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</div>

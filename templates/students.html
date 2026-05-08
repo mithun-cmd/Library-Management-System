@@ -1,79 +1,142 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Students</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body style="background-color: beige;">
+{% extends 'layout.html' %}
 
-    <div class="header">
-        <h1>College Library Management System</h1>
-    </div>
+{% block title %}
+Students
+{% endblock %}
 
-    <div class="navigation">
-      <nav>
-        <ul>
-            <li><h3><a href="{{ url_for('home') }}">Home</a></h3></li>|
-            <li><h3><a href="{{ url_for('books') }}">Books</a></h3></li>|
-            <li><h3><a href="{{ url_for('borrowreturn') }}">Borrow/Return</a></h3></li>|
-            <li><h3><a href="{{ url_for('history') }}">History</a></h3></li> 
-        
-        <div style="text-align:center; margin-top:10px;">
-          <a href="{{ url_for('all_students') }}"><button type="button">View All Students</button></a>
-        </div>
+{% block content %}
 
-
-        </ul>
-      </nav>
-    </div>
-
-<!-- Flash messages -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul style="color: green; text-align: center; list-style-type: none; padding: 10px;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-    <div class="header-option">
-    <h2>Add Student</h2>
-    </div>
+<div class="page-header">
 
     <div>
-    <center>
-    <ul>
-    <form action="/students" method="POST">
-        <li><input type="text" id="student_id" name="student_id" placeholder="*Enter Student ID" required></li><br>
-        <li><input type="text" id="student_name" name="student_name" placeholder="*Enter Student Name" required></li><br>
-        <li><input type="text" id="student_department" name="student_department" placeholder="Enter Department"></li><br><br>
-        <li><button type="reset">Reset</button>   <button type="submit">Add Student</button></li><br>
-    </form>
-    </ul>
-
-    {% if all_students %}
-<h3>All Students</h3>
-<table border="1" cellpadding="5" style="margin:auto; margin-top:10px;">
-    <tr>
-        <th>Student ID</th>
-        <th>Name</th>
-        <th>Department</th>
-    </tr>
-    {% for student in all_students %}
-    <tr>
-        <td>{{ student.student_id }}</td>
-        <td>{{ student.student_name }}</td>
-        <td>{{ student.department or '' }}</td>
-    </tr>
-    {% endfor %}
-</table>
-{% endif %}
-
-
-    </center>
+        <h1>Students Management</h1>
+        <p>Add and manage student records</p>
     </div>
 
-</body>
-</html>
+    <a href="{{ url_for('all_students') }}" class="primary-btn">
+        <i class="fa-solid fa-users"></i>
+        View All Students
+    </a>
+
+</div>
+
+<div class="form-card">
+
+    <form action="{{ url_for('students') }}" method="POST">
+
+        <div class="form-grid">
+
+            <div class="input-group">
+
+                <label>Student ID</label>
+
+                <input
+                    type="number"
+                    name="student_id"
+                    placeholder="Enter Student ID"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Student Name</label>
+
+                <input
+                    type="text"
+                    name="student_name"
+                    placeholder="Enter Student Name"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Department</label>
+
+                <input
+                    type="text"
+                    name="student_department"
+                    placeholder="Enter Department"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="form-buttons">
+
+            <button type="reset" class="secondary-btn">
+                Reset
+            </button>
+
+            <button type="submit" class="primary-btn">
+                Add Student
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% if all_students %}
+
+<div class="content-card">
+
+    <div class="table-header">
+
+        <h3>All Students</h3>
+
+        <input
+            type="text"
+            id="studentSearch"
+            placeholder="Search students..."
+            class="table-search"
+        >
+
+    </div>
+
+    <div class="table-container">
+
+        <table class="modern-table" id="studentsTable">
+
+            <thead>
+
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for student in all_students %}
+
+                <tr>
+
+                    <td>{{ student.student_id }}</td>
+
+                    <td>{{ student.student_name }}</td>
+
+                    <td>{{ student.department or '-' }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

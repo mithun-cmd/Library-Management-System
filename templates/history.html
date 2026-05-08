@@ -1,106 +1,266 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>History</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body style="background-color: beige;">
+{% extends 'layout.html' %}
 
-<div class="header">
-    <h1>College Library Management System</h1>
+{% block title %}
+History
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Library History</h1>
+        <p>Track borrow records and activity logs</p>
+    </div>
+
+    <a href="{{ url_for('borrow_logs') }}" class="primary-btn">
+
+        <i class="fa-solid fa-clock-rotate-left"></i>
+
+        View Borrow Logs
+
+    </a>
+
 </div>
 
-<div class="navigation">
-    <nav>
-        <ul>
-            <li><h3><a href="{{ url_for('home') }}">Home</a></h3></li>|
-            <li><h3><a href="{{ url_for('students') }}">Students</a></h3></li>|
-            <li><h3><a href="{{ url_for('books') }}">Books</a></h3></li>|
-            <li><h3><a href="{{ url_for('borrowreturn') }}">Borrow/Return</a></h3></li>
+<!-- SEARCH FORM -->
 
-        <div style="text-align:center; margin-top:10px;">
-            <a href="{{ url_for('borrow_logs') }}"><button type="button">View All Borrow Logs</button></a>
+<div class="form-card">
+
+    <form action="{{ url_for('history') }}" method="POST">
+
+        <div class="form-grid">
+
+            <div class="input-group">
+
+                <label>Student ID</label>
+
+                <input
+                    type="number"
+                    name="student_id"
+                    placeholder="Enter Student ID"
+                    required
+                >
+
+            </div>
+
         </div>
 
+        <div class="form-buttons">
 
-        </ul>
-    </nav>
-</div>
+            <button type="submit" class="primary-btn">
 
-<!-- Flash messages -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul style="color: green; text-align: center; list-style-type: none; padding: 10px;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+                Get History
 
-<div class="header-option">
-    <h2>History</h2>
-</div>
+            </button>
 
-<div>
-<center>
-    <!-- Student Borrow History Form -->
-    <ul>
-    <form action="/history" method="POST">
-        <li><input type="text" id="student_id" name="student_id" placeholder="*Enter Student ID" required></li><br><br>
-        <li><button type="reset">Reset</button>   <button type="submit">Get Details</button></li><br>
+        </div>
+
     </form>
-    </ul>
 
-    <!-- Student Borrow History Table -->
-    {% if history and not show_logs %}
-    <h3>Borrow History</h3>
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Borrow ID</th>
-            <th>Book ID</th>
-            <th>Borrow Date</th>
-            <th>Return Date</th>
-        </tr>
-        {% for row in history %}
-        <tr>
-            <td>{{ row.borrow_id }}</td>
-            <td>{{ row.book_id }}</td>
-            <td>{{ row.borrow_date }}</td>
-            <td>{{ row.return_date or 'Not Returned' }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+</div>
 
+<!-- STUDENT HISTORY -->
 
-    <!-- Borrow Logs Table -->
-{% if history and show_logs=='borrow_logs' %}
-<h3>Borrow Logs</h3>
-<table border="1" cellpadding="5">
-    <tr>
-        <th>Borrow ID</th>
-        <th>Student ID</th>
-        <th>Book ID</th>
-        <th>Borrow Date</th>
-        <th>Return Date</th>
-    </tr>
-    {% for log in history %}
-    <tr>
-        <td>{{ log.borrow_id }}</td>
-        <td>{{ log.student_id }}</td>
-        <td>{{ log.book_id }}</td>
-        <td>{{ log.borrow_date }}</td>
-        <td>{{ log.return_date or 'Not Returned' }}</td>
-    </tr>
-    {% endfor %}
-</table>
+{% if history and not show_logs %}
+
+<div class="content-card">
+
+    <div class="card-header">
+
+        <h3>Borrow History</h3>
+
+    </div>
+
+    <div class="table-container">
+
+        <table class="modern-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Borrow ID</th>
+                    <th>Book ID</th>
+                    <th>Borrow Date</th>
+                    <th>Return Date</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in history %}
+
+                <tr>
+
+                    <td>{{ row.borrow_id }}</td>
+
+                    <td>{{ row.book_id }}</td>
+
+                    <td>{{ row.borrow_date }}</td>
+
+                    <td>
+
+                        {% if row.return_date %}
+
+                        <span class="status available">
+                            {{ row.return_date }}
+                        </span>
+
+                        {% else %}
+
+                        <span class="status borrowed">
+                            Not Returned
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
 {% endif %}
 
+<!-- BORROW LOGS -->
 
+{% if history and show_logs == 'borrow_logs' %}
 
-</center>
+<div class="content-card">
+
+    <div class="card-header">
+
+        <h3>Borrow Logs</h3>
+
+    </div>
+
+    <div class="table-container">
+
+        <table class="modern-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Borrow ID</th>
+                    <th>Student ID</th>
+                    <th>Book ID</th>
+                    <th>Borrow Date</th>
+                    <th>Return Date</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for log in history %}
+
+                <tr>
+
+                    <td>{{ log.borrow_id }}</td>
+
+                    <td>{{ log.student_id }}</td>
+
+                    <td>{{ log.book_id }}</td>
+
+                    <td>{{ log.borrow_date }}</td>
+
+                    <td>
+
+                        {% if log.return_date %}
+
+                        <span class="status available">
+                            {{ log.return_date }}
+                        </span>
+
+                        {% else %}
+
+                        <span class="status borrowed">
+                            Not Returned
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
 </div>
 
-</body>
-</html>
+{% endif %}
+
+<!-- ACTIVITY LOGS -->
+
+{% if history and show_logs == 'activity_logs' %}
+
+<div class="content-card">
+
+    <div class="card-header">
+
+        <h3>Activity Logs</h3>
+
+    </div>
+
+    <div class="table-container">
+
+        <table class="modern-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Log ID</th>
+                    <th>Activity</th>
+                    <th>Timestamp</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for log in history %}
+
+                <tr>
+
+                    <td>{{ log.log_id }}</td>
+
+                    <td>{{ log.activity }}</td>
+
+                    <td>{{ log.log_time }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

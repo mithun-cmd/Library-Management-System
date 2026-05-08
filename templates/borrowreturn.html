@@ -1,69 +1,111 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Borrow/Return</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body style="background-color: beige;">
+{% extends 'layout.html' %}
 
-    <div class="header">
-    <h1>College Library Management System</h1>
-    </div>
+{% block title %}
+Borrow / Return
+{% endblock %}
 
-    <div class="header-option">
-    <h2>Borrow Book</h2>
-    </div>
+{% block content %}
 
-    <div class="navigation">
-        <nav>
-        <ul>
-            <li><h3><a href="{{ url_for('home') }}">Home</a></h3></li>|
-            <li><h3><a href="{{ url_for('students') }}">Students</a></h3></li>|
-            <li><h3><a href="{{ url_for('books') }}">Books</a></h3></li>|
-            <li><h3><a href="{{ url_for('history') }}">History</a></h3></li> 
-        </ul>
-        </nav>
-    </div>
-
-<!-- Flash messages -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul style="color: green; text-align: center; list-style-type: none; padding: 10px;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+<div class="page-header">
 
     <div>
-    <center>
-    <ul>
-    <form action="{{ url_for('borrowreturn') }}" method="POST">
-        <li><input type="text" id="borrow_student_id" name="borrow_student_id" placeholder="*Enter Student ID" required></li><br>
-        <li><input type="text" id="borrow_book_id" name="borrow_book_id" placeholder="*Enter Book ID" required></li><br><br>
-        <li><button type="reset">Reset</button>   <button type="submit">Borrow</button><br><br>
-    </form>
-    </ul>
-    </center>
+        <h1>Borrow & Return</h1>
+        <p>Manage book transactions</p>
     </div>
 
-    <hr>
+</div>
 
-    <div class="header-option">
-    <h2>Return Book</h2>
+<div class="borrow-grid">
+
+    <!-- BORROW -->
+
+    <div class="form-card">
+
+        <div class="card-header">
+
+            <h2>
+                <i class="fa-solid fa-book-open-reader"></i>
+                Borrow Book
+            </h2>
+
+        </div>
+
+        <form action="{{ url_for('borrowreturn') }}" method="POST">
+
+            <div class="input-group">
+
+                <label>Student ID</label>
+
+                <input
+                    type="number"
+                    name="borrow_student_id"
+                    placeholder="Enter Student ID"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Book ID</label>
+
+                <input
+                    type="number"
+                    name="borrow_book_id"
+                    placeholder="Enter Book ID"
+                    required
+                >
+
+            </div>
+
+            <button type="submit" class="primary-btn full-width">
+
+                Borrow Book
+
+            </button>
+
+        </form>
+
     </div>
 
-    <div>
-    <center>
-    <ul>
-    <form action="{{ url_for('borrowreturn') }}" method="POST">
-        <li><input type="text" id="return_borrow_id" name="return_borrow_id" placeholder="*Enter Borrow ID" required><li><br><br>
-        <li><button type="reset">Reset</button>   <button type="submit">Return</button><br>
-    </form>
-    </ul>
-    </center>
+    <!-- RETURN -->
+
+    <div class="form-card">
+
+        <div class="card-header">
+
+            <h2>
+                <i class="fa-solid fa-rotate-left"></i>
+                Return Book
+            </h2>
+
+        </div>
+
+        <form action="{{ url_for('borrowreturn') }}" method="POST">
+
+            <div class="input-group">
+
+                <label>Borrow ID</label>
+
+                <input
+                    type="number"
+                    name="return_borrow_id"
+                    placeholder="Enter Borrow ID"
+                    required
+                >
+
+            </div>
+
+            <button type="submit" class="primary-btn full-width">
+
+                Return Book
+
+            </button>
+
+        </form>
+
     </div>
 
-</body>
-</html>
+</div>
+
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>
+            Smart Library Dashboard
+        </h1>
+
+        <p>
+            Manage books, students, borrow records,
+            and activities in one modern platform.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+            href="{{ url_for('students') }}"
+            class="primary-btn"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Add Student
+
+            </a>
+
+            <a
+            href="{{ url_for('books') }}"
+            class="secondary-btn"
+            >
+
+                <i class="fa-solid fa-book-medical"></i>
+
+                Add Book
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% if db_error %}
+
+<div class="flash-message error">
+
+    MySQL database is not connected.
+
+    Start MySQL server and import schema.sql
+
+</div>
+
+{% endif %}
+
+<!-- STAT CARDS -->
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div>
+            <h2>{{ total_students }}</h2>
+            <p>Total Students</p>
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-book"></i>
+        </div>
+
+        <div>
+            <h2>{{ total_books }}</h2>
+            <p>Total Books</p>
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        </div>
+
+        <div>
+            <h2>{{ borrowed_books }}</h2>
+            <p>Borrowed Books</p>
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div>
+            <h2>{{ available_books }}</h2>
+            <p>Available Books</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- RECENT ACTIVITIES -->
+
+<div class="content-card">
+
+    <div class="card-header">
+
+        <h3>Recent Activities</h3>
+
+    </div>
+
+    <table class="modern-table">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Activity</th>
+                <th>Time</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for log in recent_logs %}
+
+            <tr>
+
+                <td>{{ log.log_id }}</td>
+
+                <td>{{ log.activity }}</td>
+
+                <td>{{ log.log_time }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

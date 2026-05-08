@@ -1,4 +1,4 @@
-# 📚 College Library Management System
+# 📚 College Library Management System - LibraryX
 
 A modern full-stack Library Management System built using **Flask**, **MySQL**, **HTML/CSS**, and **JavaScript** with an advanced dashboard UI, dynamic interactions, database procedures, triggers, and responsive design.
 

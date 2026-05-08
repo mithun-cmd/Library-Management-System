@@ -14,10 +14,10 @@ cursor = None
 try:
 
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your_mysql_password",
-        database="library_db"
+        host="localhost",                       ## YOUR HOST HERE IF DIFFERENT
+        user="root",                            ## YOUR USERNAME HERE IF DIFFERENT
+        password="rootmysql",                   ## YOUR PASSWORD HERE
+        database="LibraryManagementSystem"      ## YOUR DATABASE NAME HERE
     )
 
     cursor = db.cursor(dictionary=True)

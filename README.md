@@ -35,16 +35,15 @@ mysql -u root -p library_db < database/schema.sql
 
 python
 
-DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "your_mysql_password",   # 🔑 Change here
-    "database": "library_db"
-}
+    db = mysql.connector.connect(
+        host="localhost",                       ## YOUR HOST HERE IF DIFFERENT
+        user="root",                            ## YOUR USERNAME HERE IF DIFFERENT
+        password="rootmysql",                   ## YOUR PASSWORD HERE
+        database="LibraryManagementSystem"      ## YOUR DATABASE NAME HERE
 
 6.Run the app:
 
 bash
 
-python app/library.py
+python library.py
 Open browser: http://127.0.0.1:5000/
